@@ -1,4 +1,4 @@
-wildfire_model
+Probabilistic Model for Wildfire Spread
 ==============
 
 Probabilistically models the spread of a wildfire throughout a dense forest and displays the progression graphically. Probabilities of a tree igniting or dying are drawn from a customizable distribution.
