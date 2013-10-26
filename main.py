@@ -22,7 +22,7 @@ def constant():
 
 # NE Wind, 30% strength.
 wind = [math.cos(math.pi/4.0), math.sin(math.pi/4.0)]
-windstr = 1.0
+windstr = 0.30
 # Start fire in the middle
 start = [0.5, 0.5]
 
