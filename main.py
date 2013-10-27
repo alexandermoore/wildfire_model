@@ -15,13 +15,13 @@ import random
 
 # Specify distributions for probabilities
 def uniform():
-	return random.random()*0.30
+	return random.random()
 
 def constant():
 	return 0.70
 
 def emptyconst():
-	return 0.50
+	return 0.30
 
 # NE Wind, 30% strength.
 wind = [math.cos(math.pi/4.0), math.sin(math.pi/4.0)]
