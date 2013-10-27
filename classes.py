@@ -23,7 +23,7 @@ STATES = {
 	'alive': {'color': "#00ff00"},
 	'burning': {'color': "#ff0000"},
 	'dead': {'color': "#aaaaaa"},
-	'empty': {'color': '#222222'},
+	'empty': {'color': '#000000'},
 }
 
 # Define grid size, size of window and size of each tree rectangle

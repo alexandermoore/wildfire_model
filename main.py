@@ -21,7 +21,7 @@ def constant():
 	return 0.70
 
 def emptyconst():
-	return 0.20
+	return 0.50
 
 # NE Wind, 30% strength.
 wind = [math.cos(math.pi/4.0), math.sin(math.pi/4.0)]
