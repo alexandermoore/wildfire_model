@@ -23,6 +23,7 @@ STATES = {
 	'alive': {'color': "#00ff00"},
 	'burning': {'color': "#ff0000"},
 	'dead': {'color': "#aaaaaa"},
+	'empty': {'color': '#222222'},
 }
 
 # Define grid size, size of window and size of each tree rectangle
@@ -101,19 +102,20 @@ class Simulation:
 	Contains a function for handling the execution of the simulation
 	"""
 
-	def __init__(self, rowfireperc, colfireperc, burnfunc, diefunc, windvec, windstr):
+	def __init__(self, rowfireperc, colfireperc, burnfunc, diefunc, emptyfunc, windvec, windstr):
 		"""
 		Sets up the necessary parameters for running a simulation of a fire in a LANDSIZE * LANDSIZE forest.
 		The first fire starts rowfireperc percent of the way down the grid and colfireperc percent of the
 		way across the grid.
-		burnfunc and diefunc are functions which return a random probability of being burned or
+		burnfunc and diefunc are functions which return a random probability of a Tree being burned or
 		dying. The purpose of this is to be able to use probability distributions
 		when assigning probabilities to individual trees.
+		emptyfunc is a function which returns the probability of a Tree starting out empty (vacant cell)
 		Windvec should be a normalized direction vector of the form [Xdir, Ydir].
 		Windstr specifies the strength of the wind (from 0.0 to 1.0)
 		"""
 		# Initialize board to bunch of trees. 
-		self.board = [[Tree(burnfunc(), diefunc()) for _ in range(LANDSIZE)] for _ in range(LANDSIZE)]
+		self.board = [[Tree(burnfunc(), diefunc(), emptyfunc()) for _ in range(LANDSIZE)] for _ in range(LANDSIZE)]
 
 		# Make the specified tree burn
 		self.board[int(LANDSIZE * rowfireperc)][int(LANDSIZE * colfireperc)].state = STATES['burning']
@@ -154,13 +156,16 @@ class Tree:
 	A representation of a Tree with a given state and various parameters.
 	"""
 
-	def __init__(self, pburn, pdie):
+	def __init__(self, pburn, pdie, pempty):
 		"""
 		Specifies initial state of trees. Takes in probability of igniting given an
 		adjacent tree is burning and the probability of dying given it has been ignited.
 		"""
 		# Trees alive at start
-		self.state = STATES['alive']
+		if random.random() <= pempty:
+			self.state = STATES['empty']
+		else:
+			self.state = STATES['alive']
 		# Probabilities of starting to burn (given an adjacent tree is burning) and dying while burning at each timestep
 		self.pburn = pburn
 		self.pdie = pdie

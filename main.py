@@ -15,19 +15,22 @@ import random
 
 # Specify distributions for probabilities
 def uniform():
-	return random.random()
+	return random.random()*0.30
 
 def constant():
 	return 0.70
 
+def emptyconst():
+	return 0.20
+
 # NE Wind, 30% strength.
 wind = [math.cos(math.pi/4.0), math.sin(math.pi/4.0)]
-windstr = 0.30
+windstr = 0.3
 # Start fire in the middle
 start = [0.5, 0.5]
 
 # P(burn) given by uniform distribution, P(die) given by "constant"
-simulation = Simulation(start[0], start[1], uniform, constant, wind, windstr)
+simulation = Simulation(start[0], start[1], uniform, constant, emptyconst, wind, windstr)
 
 graphic = GraphicWrapper(simulation)
 graphic.run()
